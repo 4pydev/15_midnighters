@@ -34,7 +34,7 @@ def get_midnighters():
 
 
 if __name__ == '__main__':
-    i = 1
+    counter = 1
     for user in get_midnighters():
-        print(i, ' : ', user)
+        print(counter, ' : ', user)
         i += 1
