@@ -6,9 +6,9 @@ import pytz
 
 
 def load_attempts():
-    pages = 10
+    url = 'https://devman.org/api/challenges/solution_attempts/'
+    pages = requests.get(url, ).json()['number_of_pages']
     for page in range(1, pages+1):
-        url = 'https://devman.org/api/challenges/solution_attempts/'
         params = {
             'page': page
             }
@@ -34,7 +34,5 @@ def get_midnighters():
 
 
 if __name__ == '__main__':
-    counter = 1
-    for user in get_midnighters():
-        print(counter, ' : ', user)
-        i += 1
+    for counter, user in enumerate(get_midnighters()):
+        print('{} : {}'.format(counter, user))
