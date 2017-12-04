@@ -7,7 +7,7 @@ import pytz
 
 def load_attempts():
     url = 'https://devman.org/api/challenges/solution_attempts/'
-    pages = requests.get(url, ).json()['number_of_pages']
+    pages = requests.get(url).json()['number_of_pages']
     for page in range(1, pages+1):
         params = {
             'page': page
