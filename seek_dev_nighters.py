@@ -7,14 +7,21 @@ import pytz
 
 def load_attempts():
     url = 'https://devman.org/api/challenges/solution_attempts/'
-    pages = requests.get(url).json()['number_of_pages']
-    for page in range(1, pages+1):
-        params = {
-            'page': page
-            }
-        users_attempts = requests.get(url, params).json()['records']
+    params = {
+        'page': 1
+    }
+
+    while True:
+        response = requests.get(url, params).json()
+        page = response['page']
+        number_of_pages = response['number_of_pages']
+        users_attempts = response['records']
         for attempt in users_attempts:
             yield attempt
+        params = {
+            'page': page + 1
+        }
+        if page + 1 > number_of_pages: break
 
 
 def is_midnighter(user_attempt):
